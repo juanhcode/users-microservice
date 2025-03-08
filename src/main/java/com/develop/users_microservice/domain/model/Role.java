@@ -2,10 +2,10 @@ package com.develop.users_microservice.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "role")
 public class Role {
     @Id

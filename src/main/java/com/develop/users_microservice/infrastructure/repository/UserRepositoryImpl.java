@@ -13,4 +13,10 @@ public interface UserRepositoryImpl  extends JpaRepository<User, Long>, UserRepo
 
     @Override
     List<User> findAll();
+
+    @Override
+    Optional<User> findById(Long id);
+
+    @Override
+    void deleteById(Long id);
 }
