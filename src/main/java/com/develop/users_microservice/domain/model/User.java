@@ -38,4 +38,7 @@ public class User {
 
     @Column(nullable = false, length = 500)
     private String token; // Ahora se almacena en la BD
+
+    @Column(nullable = false)
+    private boolean enabled;
 }

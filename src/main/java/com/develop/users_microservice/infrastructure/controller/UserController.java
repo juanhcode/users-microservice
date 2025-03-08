@@ -20,4 +20,15 @@ public class UserController {
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(getAllUsersUseCase.execute());
     }
+
+    @GetMapping
+    public ResponseEntity<User> getUser(Long id) {
+        return ResponseEntity.ok(getAllUsersUseCase.getUser(id).get());
+    }
+
+    @GetMapping
+    public ResponseEntity<Void> deleteUser(Long id) {
+        getAllUsersUseCase.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
 }

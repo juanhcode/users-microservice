@@ -5,7 +5,7 @@ import com.develop.users_microservice.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.Optional;
 import java.util.List;
 
 
@@ -17,5 +17,14 @@ public class GetAllUsersUseCase {
 
     public List<User> execute() {
         return userRepository.findAll();
+    }
+
+    public Optional<User> getUser(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public void deleteUser(Long id) {
+        System.out.println("hola");
+        userRepository.deleteById(id);
     }
 }
