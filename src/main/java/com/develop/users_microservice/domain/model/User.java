@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "users")
 public class User {
     @Id
@@ -28,10 +28,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role roleId;
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @Column(length = 255)
     private String address;
