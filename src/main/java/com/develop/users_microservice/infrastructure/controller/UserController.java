@@ -2,6 +2,7 @@ package com.develop.users_microservice.infrastructure.controller;
 
 import com.develop.users_microservice.application.usecase.GetAllUsersUseCase;
 import com.develop.users_microservice.domain.model.User;
+import com.develop.users_microservice.domain.service.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final GetAllUsersUseCase getAllUsersUseCase;
-
+    private final PasswordEncoder passwordEncoder;
     // Obtener todos los usuarios
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
