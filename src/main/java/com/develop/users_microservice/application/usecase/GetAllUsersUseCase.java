@@ -3,6 +3,8 @@ package com.develop.users_microservice.application.usecase;
 import com.develop.users_microservice.domain.model.User;
 import com.develop.users_microservice.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.List;
@@ -22,7 +24,6 @@ public class GetAllUsersUseCase {
     }
 
     public void deleteUser(Long id) {
-        System.out.println("hola");
         userRepository.deleteById(id);
     }
 }
