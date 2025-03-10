@@ -1,5 +1,6 @@
 package com.develop.users_microservice.infrastructure.controller;
 
+import com.develop.users_microservice.application.dto.UserFilterRequest;
 import com.develop.users_microservice.application.usecase.GetAllUsersUseCase;
 import com.develop.users_microservice.domain.model.User;
 import com.develop.users_microservice.domain.service.PasswordEncoder;
@@ -16,9 +17,10 @@ public class UserController {
     private final GetAllUsersUseCase getAllUsersUseCase;
     private final PasswordEncoder passwordEncoder;
     // Obtener todos los usuarios
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(getAllUsersUseCase.execute());
+    @PostMapping("/get-users")
+    public ResponseEntity<List<User>> getAllUsers(@RequestBody(required = false) UserFilterRequest filterRequest) {
+        List<User> users = getAllUsersUseCase.execute(filterRequest);
+        return ResponseEntity.ok(users);
     }
 
     // Obtener un usuario por ID
