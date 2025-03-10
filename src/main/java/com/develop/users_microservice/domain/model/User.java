@@ -1,9 +1,14 @@
 package com.develop.users_microservice.domain.model;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Getter
@@ -16,15 +21,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Ahora es manual
 
+    @NotBlank(message = "El nombre es requerido")
+    @Size(min = 1, max = 50, message = "El nombre debe tener entre 1 y 50 caracteres")
     @Column(nullable = false, length = 50)
     private String name;
 
     @Column(nullable = false, length = 50)
     private String lastName;
 
+
+    @NotBlank(message = "El correo electrónico es requerido")
+    @Email(message = "El correo electrónico debe ser válido")
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
+    @NotBlank(message = "La contraseña es requerida")
+    @Length(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
     @Column(nullable = false)
     private String password;
 

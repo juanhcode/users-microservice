@@ -18,5 +18,8 @@ public interface UserRepositoryImpl  extends JpaRepository<User, Long>, UserRepo
     Optional<User> findById(Long id);
 
     @Override
+    User save(User user);
+
+    @Override
     void deleteById(Long id);
 }

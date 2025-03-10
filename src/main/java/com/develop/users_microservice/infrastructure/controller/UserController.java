@@ -3,10 +3,17 @@ package com.develop.users_microservice.infrastructure.controller;
 import com.develop.users_microservice.application.usecase.GetAllUsersUseCase;
 import com.develop.users_microservice.domain.model.User;
 import com.develop.users_microservice.domain.service.PasswordEncoder;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.management.RuntimeErrorException;
 import java.util.List;
 
 @RestController
@@ -23,10 +30,19 @@ public class UserController {
 
     // Obtener un usuario por ID
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<User> getUser(@Valid @PathVariable Long id) {
         return getAllUsersUseCase.getUser(id)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                //.orElse(ResponseEntity.notFound().build())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+                //.orElseThrow(()  -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Usuario no encontrado"));
+    }
+
+    // Crear un usuario
+    @PostMapping
+    public ResponseEntity<User> createdUser(@Valid @RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return ResponseEntity.ok(getAllUsersUseCase.saveUser(user));
     }
 
     // Eliminar un usuario por ID
