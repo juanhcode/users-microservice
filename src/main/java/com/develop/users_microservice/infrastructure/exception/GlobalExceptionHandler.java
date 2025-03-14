@@ -34,6 +34,12 @@ public class GlobalExceptionHandler {
         return buildErrorResponse((HttpStatus) ex.getStatusCode(), ex.getReason(), null, request);
     }
 
+    // Manejo de errores como 500 - Internal Server Error (ya sea tambien por timeout)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleException(Exception ex, WebRequest request) {
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Error interno del servidor", null, request);
+    }
+
     // Funcion para construir las respuestas de error
     private ResponseEntity<Map<String, Object>> buildErrorResponse(HttpStatus status, String message, Map<String, String> fieldErrors, WebRequest request) {
         Map<String, Object> errors = new LinkedHashMap<>();

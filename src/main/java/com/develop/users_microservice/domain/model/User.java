@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Ahora es manual
 
-    @NotBlank(message = "El nombre es requerido")
+    @NotBlank(message = "El nombre no puede ser nulo")
     @Size(min = 1, max = 50, message = "El nombre debe tener entre 1 y 50 caracteres")
     @Column(nullable = false, length = 50)
     private String name;
@@ -41,6 +41,7 @@ public class User {
     private String password;
 
     @ManyToOne
+    @NotNull(message = "El rol es requerido")
     @JoinColumn(name = "role_id")
     private Role role;
 
