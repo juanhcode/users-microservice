@@ -12,6 +12,4 @@ public class UserFilterRequest {
     private String email;
     private Boolean enabled = true;
     private Long roleId;
-    private int page = 0; // Página por defecto
-    private int size = 10; // Tamaño por defecto
 }
