@@ -1,6 +1,8 @@
 package com.develop.users_microservice.infrastructure.controller;
 
 import com.develop.users_microservice.application.dto.UserFilterRequest;
+import com.develop.users_microservice.application.dto.UserRequestDTO;
+import com.develop.users_microservice.application.dto.UserResponseDTO;
 import com.develop.users_microservice.application.usecase.GetAllUsersUseCase;
 import com.develop.users_microservice.domain.model.User;
 import com.develop.users_microservice.domain.service.PasswordEncoder;
@@ -35,16 +37,14 @@ public class UserController {
     public ResponseEntity<User> getUser(@Valid @PathVariable Long id) {
         return getAllUsersUseCase.getUser(id)
                 .map(ResponseEntity::ok)
-                //.orElse(ResponseEntity.notFound().build())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
-                //.orElseThrow(()  -> new ResponseStatusException(HttpStatusCode.valueOf(404), "Usuario no encontrado"));
     }
 
     // Crear un usuario
     @PostMapping
-    public ResponseEntity<User> createdUser(@Valid @RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return ResponseEntity.ok(getAllUsersUseCase.saveUser(user));
+    public ResponseEntity<UserResponseDTO> createdUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        UserResponseDTO userResponseDTO = getAllUsersUseCase.save(userRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDTO); // retornaria un 201
     }
 
     // Eliminar un usuario por ID

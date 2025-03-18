@@ -22,23 +22,17 @@ public class User {
     private Long id; // Ahora es manual
 
     @NotBlank(message = "El nombre no puede ser nulo")
-    @Size(min = 1, max = 50, message = "El nombre debe tener entre 1 y 50 caracteres")
+    @Size(max = 50, message = "El nombre debe tener entre 1 y 50 caracteres")
     @Column(nullable = false, length = 50)
     private String name;
 
     @Column(nullable = false, length = 50)
     private String lastName;
 
-
     @NotBlank(message = "El correo electrónico es requerido")
     @Email(message = "El correo electrónico debe ser válido")
     @Column(nullable = false, unique = true, length = 100)
     private String email;
-
-    @NotBlank(message = "La contraseña es requerida")
-    @Length(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
-    @Column(nullable = false)
-    private String password;
 
     @ManyToOne
     @NotNull(message = "El rol es requerido")
@@ -47,9 +41,6 @@ public class User {
 
     @Column(length = 255)
     private String address;
-
-    @Column(nullable = false, length = 500)
-    private String token; // Ahora se almacena en la BD
 
     @Column(nullable = false)
     private boolean enabled;

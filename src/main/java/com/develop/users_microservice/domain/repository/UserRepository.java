@@ -1,5 +1,6 @@
 package com.develop.users_microservice.domain.repository;
 
+import com.develop.users_microservice.domain.model.Role;
 import com.develop.users_microservice.domain.model.User;
 import org.hibernate.query.Page;
 import org.springframework.data.jpa.repository.Modifying;
@@ -30,4 +31,8 @@ public interface UserRepository {
                                @Param("email") String email,
                                @Param("enabled") Boolean enabled,
                                @Param("roleId") Long roleId);
+
+    // busco el rol por id
+    @Query("SELECT r FROM Role r WHERE r.id = :roleId")
+    Optional<Role> findRoleById(@Param("roleId") Long roleId);
 }
