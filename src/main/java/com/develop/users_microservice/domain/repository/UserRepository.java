@@ -35,4 +35,5 @@ public interface UserRepository {
     // busco el rol por id
     @Query("SELECT r FROM Role r WHERE r.id = :roleId")
     Optional<Role> findRoleById(@Param("roleId") Long roleId);
+    Optional<User> findByEmail(String email);
 }

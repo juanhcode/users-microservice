@@ -9,8 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepositoryImpl  extends JpaRepository<User, Long>, UserRepository{
-    Optional<User> findByEmail(String email);
-
+    //boolean findByEmail(String email);
     @Override
     List<User> findAll();
 
@@ -22,4 +21,5 @@ public interface UserRepositoryImpl  extends JpaRepository<User, Long>, UserRepo
 
     @Override
     void deleteById(Long id);
+
 }
