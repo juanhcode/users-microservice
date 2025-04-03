@@ -34,18 +34,12 @@ jobs:
 
       - name: Construir y etiquetar imagen
         run: |
-          TAG=$(echo $GITHUB_SHA | cut -c1-7)
-          docker build -t $IMAGE_NAME:latest .
-          docker push $IMAGE_NAME:latest
+          docker build -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
 
       - name: Actualizar manifiestos de Kubernetes
         run: |
-          TAG=$(echo $GITHUB_SHA | cut -c1-7)
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            sed -i "s|image: $IMAGE_NAME:.*|image: $IMAGE_NAME:prod-$TAG|" k8s/deployment.yaml
-          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
-            sed -i "s|image: $IMAGE_NAME:.*|image: $IMAGE_NAME:dev-$TAG|" k8s/deployment.yaml
-          fi
+          sed -i "s|image: .*|image: $IMAGE_NAME|" k8s/deployment.yaml
 
       - name: Subir cambios a repositorio GitOps
         uses: stefanzweifel/git-auto-commit-action@v5
