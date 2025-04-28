@@ -30,7 +30,6 @@ public class GetAllUsersUseCase {
         );
     }
 
-    // Aquí ya no necesitamos RoleRepository, usamos el UserRepository para obtener Role
     public UserResponseDTO save(UserRequestDTO userRequest) {
         // Validar que el role.id no sea nulo
         if (userRequest.getRoleId() == null) {
@@ -81,10 +80,36 @@ public class GetAllUsersUseCase {
         return userResponse;
     }
 
+    public Optional<User> updateUser(Long id, UserRequestDTO userRequestDTO) {
+        // obtenemos el id del user que queremos editar
+        Optional<User> userOptional = userRepository.findById(id);
+        if (!userOptional.isPresent()) {
+            return Optional.empty(); // Retornar vacío si el usuario no existe
+        }
+
+        User userExisting = userOptional.get();
+
+        // miramos que el email exista (cuando se este modificando)
+        if (userRequestDTO.getEmail() != null && !userRequestDTO.getEmail().equals(userExisting.getEmail())) {
+            if (userRepository.findByEmail(userRequestDTO.getEmail()).isPresent()) {
+                throw new RuntimeException("El correo electrónico ya está en uso");
+            }
+        }
+        // seteamos los campos
+        Optional.ofNullable(userRequestDTO.getName()).ifPresent(userExisting::setName);
+        Optional.ofNullable(userRequestDTO.getLastName()).ifPresent(userExisting::setLastName);
+        Optional.ofNullable(userRequestDTO.getEmail()).ifPresent(userExisting::setEmail);
+        Optional.ofNullable(userRequestDTO.getAddress()).ifPresent(userExisting::setAddress);
+
+        // se guarda el usuario actualizado y se retorna
+        User updatedUser = userRepository.save(userExisting);
+        return Optional.of(updatedUser);
+    }
+
+
     public Optional<User> getUser(Long id) {
         return userRepository.findById(id);
     }
-    //public User save(User user) {return userRepository.save(user);}
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
