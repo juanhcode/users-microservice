@@ -29,4 +29,6 @@ public interface JpaUserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT r FROM Role r WHERE r.id = :roleId")
     Optional<Role> findRoleById(@Param("roleId") Long roleId);
+
+    Optional<User> findByEmail(String email);
 }
