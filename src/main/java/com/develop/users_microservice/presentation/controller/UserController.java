@@ -1,23 +1,17 @@
-package com.develop.users_microservice.infrastructure.controller;
+package com.develop.users_microservice.presentation.controller;
 
-import com.develop.users_microservice.application.dto.UserFilterRequest;
-import com.develop.users_microservice.application.dto.UserRequestDTO;
-import com.develop.users_microservice.application.dto.UserResponseDTO;
+import com.develop.users_microservice.presentation.dto.UserFilterRequest;
+import com.develop.users_microservice.presentation.dto.UserRequestDTO;
+import com.develop.users_microservice.presentation.dto.UserResponseDTO;
 import com.develop.users_microservice.application.usecase.GetAllUsersUseCase;
 import com.develop.users_microservice.domain.model.User;
-import com.develop.users_microservice.domain.service.PasswordEncoder;
-import com.develop.users_microservice.infrastructure.repository.UserRepositoryImpl;
-import com.develop.users_microservice.domain.repository.UserRepository;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.management.RuntimeErrorException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +20,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final GetAllUsersUseCase getAllUsersUseCase;
-    private final PasswordEncoder passwordEncoder;
-    private final UserRepositoryImpl userRepositoryImpl;
 
     // Obtener todos los usuarios
     @PostMapping("/get-users")

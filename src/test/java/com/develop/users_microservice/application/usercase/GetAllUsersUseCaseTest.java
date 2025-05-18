@@ -1,11 +1,11 @@
 package com.develop.users_microservice.application.usercase;
 
-import com.develop.users_microservice.application.dto.UserRequestDTO;
-import com.develop.users_microservice.application.dto.UserResponseDTO;
+import com.develop.users_microservice.presentation.dto.UserRequestDTO;
+import com.develop.users_microservice.presentation.dto.UserResponseDTO;
 import com.develop.users_microservice.application.usecase.GetAllUsersUseCase;
 import com.develop.users_microservice.domain.model.Role;
 import com.develop.users_microservice.domain.model.User;
-import com.develop.users_microservice.domain.repository.UserRepository;
+import com.develop.users_microservice.domain.interfaces.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 public class GetAllUsersUseCaseTest {
     @Mock
-    private UserRepository userRepository;
+    private UserService userRepository;
 
     @InjectMocks
     private GetAllUsersUseCase getAllUsersUseCase;

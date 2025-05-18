@@ -1,4 +1,4 @@
-package com.develop.users_microservice.domain.repository;
+package com.develop.users_microservice.domain.interfaces;
 
 import com.develop.users_microservice.domain.model.Role;
 import com.develop.users_microservice.domain.model.User;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface UserRepository {
+public interface UserService {
     List<User> findAll();
     List<User> findByEnabled(boolean enabled);
     Optional<User> findById(Long id);
