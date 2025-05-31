@@ -61,7 +61,7 @@ public class GetAllUsersUseCase {
     }
 
     // convertir un usuario a UserResponseDTO
-    private UserResponseDTO toUserResponseDTO(User user) {
+    public UserResponseDTO toUserResponseDTO(User user) {
         UserResponseDTO userResponse = new UserResponseDTO();
         userResponse.setId(user.getId());
         userResponse.setName(user.getName());
