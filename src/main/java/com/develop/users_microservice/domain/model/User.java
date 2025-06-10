@@ -44,4 +44,14 @@ public class User {
 
     @Column(nullable = false)
     private boolean enabled;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                '}';
+    }
 }

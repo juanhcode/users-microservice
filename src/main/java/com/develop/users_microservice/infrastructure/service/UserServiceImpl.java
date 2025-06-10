@@ -1,17 +1,21 @@
-package com.develop.users_microservice.infrastructure.repository;
+package com.develop.users_microservice.infrastructure.service;
 import com.develop.users_microservice.domain.model.Role;
 import com.develop.users_microservice.domain.model.User;
-import com.develop.users_microservice.domain.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.develop.users_microservice.domain.interfaces.UserService;
+import com.develop.users_microservice.infrastructure.repository.JpaUserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-@RequiredArgsConstructor
-public class UserRepositoryImpl implements UserRepository{
+@Service
+public class UserServiceImpl implements UserService {
+
+    public UserServiceImpl(
+            JpaUserRepository jpaUserRepository
+    ) {
+        this.jpaUserRepository = jpaUserRepository;
+    }
 
     private final JpaUserRepository jpaUserRepository;
 

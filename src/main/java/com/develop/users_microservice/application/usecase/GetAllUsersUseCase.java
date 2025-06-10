@@ -1,11 +1,11 @@
 package com.develop.users_microservice.application.usecase;
 
-import com.develop.users_microservice.application.dto.UserFilterRequest;
-import com.develop.users_microservice.application.dto.UserRequestDTO;
-import com.develop.users_microservice.application.dto.UserResponseDTO;
+import com.develop.users_microservice.presentation.dto.UserFilterRequest;
+import com.develop.users_microservice.presentation.dto.UserRequestDTO;
+import com.develop.users_microservice.presentation.dto.UserResponseDTO;
 import com.develop.users_microservice.domain.model.User;
 import com.develop.users_microservice.domain.model.Role;
-import com.develop.users_microservice.domain.repository.UserRepository;
+import com.develop.users_microservice.domain.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GetAllUsersUseCase {
-    private final UserRepository userRepository;
+    private final UserService userRepository;
 
 
     public List<User> execute(UserFilterRequest filterRequest) {
@@ -61,7 +61,7 @@ public class GetAllUsersUseCase {
     }
 
     // convertir un usuario a UserResponseDTO
-    private UserResponseDTO toUserResponseDTO(User user) {
+    public UserResponseDTO toUserResponseDTO(User user) {
         UserResponseDTO userResponse = new UserResponseDTO();
         userResponse.setId(user.getId());
         userResponse.setName(user.getName());
