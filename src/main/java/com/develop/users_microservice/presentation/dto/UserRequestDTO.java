@@ -1,4 +1,4 @@
-package com.develop.users_microservice.application.dto;
+package com.develop.users_microservice.presentation.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
