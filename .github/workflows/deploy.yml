@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: juanhoyos/microservice:users-v2 # user de dockerhub
+  IMAGE_NAME: juanhoyos/microservice:users-v3 # user de dockerhub
   REGISTRY: docker.io
 
 jobs:
