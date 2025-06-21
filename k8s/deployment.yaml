@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-microservice
+  name: users-microservice
   labels:
-    app: user-microservice
+    app: users-microservice
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-microservice
+      app: users-microservice
   template:
     metadata:
       labels:
-        app: user-microservice
+        app: users-microservice
     spec:
       containers:
-        - name: user-microservice
-          image: juanhoyos/microservice:users-v4
+        - name: users-microservice
+          image: juanhoyos/microservice:users-v5
           ports:
             - containerPort: 8081
           env:
