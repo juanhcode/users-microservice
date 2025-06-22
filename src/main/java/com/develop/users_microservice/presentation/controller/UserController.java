@@ -37,7 +37,7 @@ public class UserController {
     }
 
     // Crear un usuario
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UserResponseDTO> createdUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
         UserResponseDTO userResponseDTO = getAllUsersUseCase.save(userRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDTO); // retornaria un 201
