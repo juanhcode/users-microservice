@@ -16,12 +16,27 @@ spec:
     spec:
       containers:
         - name: users-microservice
-          image: juanhoyos/microservice:users-v6
+          image: juanhoyos/microservice:users-v7
           ports:
             - containerPort: 8081
           env:
             - name: SERVER_PORT
               value: "8081"
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: password
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: credentials
+                  key: url
           resources:
             limits:
               memory: "512Mi"
